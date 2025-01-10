@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">MyDemoApp</string>
     <string name="users_list">List</string>
+    <string name="sample_name">Lorem Ipsum</string>
+    <string name="sample_email">loremipsum@lorem.com</string>
 </resources>

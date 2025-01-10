@@ -1,7 +1,6 @@
 package com.sg.mydemoapp.data.remote
 
-import com.sg.mydemoapp.data.model.User
-import okhttp3.Call
+import com.sg.mydemoapp.data.local.entity.User
 import retrofit2.Response
 import retrofit2.http.GET
 
