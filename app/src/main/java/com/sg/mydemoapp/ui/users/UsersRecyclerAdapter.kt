@@ -51,6 +51,10 @@ class UsersRecyclerAdapter(private var list: List<User>) :
             holder.iv_dp.setColorFilter(color)
         }
 
+        holder.itemView.setOnClickListener {
+
+        }
+
     }
 
     public fun updateList(listToUpdate: List<User>) {

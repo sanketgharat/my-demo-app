@@ -77,7 +77,7 @@ dependencies {
 
     //Room DB
     val roomVersion = "2.6.1"
-    implementation("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
     ksp("androidx.room:room-compiler:$roomVersion")
 
     //gson

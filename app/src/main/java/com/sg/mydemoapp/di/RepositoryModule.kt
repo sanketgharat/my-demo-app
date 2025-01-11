@@ -3,6 +3,7 @@ package com.sg.mydemoapp.di
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.sg.mydemoapp.data.UsersRepository
+import com.sg.mydemoapp.data.local.database.UsersDatabase
 import com.sg.mydemoapp.data.remote.APIService
 import com.sg.mydemoapp.utils.Constants
 import dagger.Module
@@ -38,8 +39,8 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideUsersRepository(apiService: APIService) : UsersRepository {
-        return UsersRepository(apiService)
+    fun provideUsersRepository(apiService: APIService, database: UsersDatabase) : UsersRepository {
+        return UsersRepository(apiService, database)
     }
 
 }

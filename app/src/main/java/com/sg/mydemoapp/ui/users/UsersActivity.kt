@@ -1,11 +1,13 @@
 package com.sg.mydemoapp.ui.users
 
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sg.mydemoapp.BaseActivity
 import com.sg.mydemoapp.databinding.ActivityUsersBinding
 import com.sg.mydemoapp.utils.CommonUtil
+import com.sg.mydemoapp.utils.Logger
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -15,7 +17,7 @@ class UsersActivity : BaseActivity() {
     private lateinit var viewModel: UsersViewModel
 
     companion object {
-        val TAG = UsersActivity::class.java.kotlin.simpleName
+        val TAG = "UsersActivityT"
     }
 
     private lateinit var adapter: UsersRecyclerAdapter
@@ -31,19 +33,39 @@ class UsersActivity : BaseActivity() {
         }
 
         viewModel.users.observe(this) {
-            if(it.isNotEmpty()) {
+            Logger.d(TAG, "users observe: ${it.size}")
+            if (it.isNotEmpty()) {
                 adapter.updateList(it)
             }
 
         }
         viewModel.error.observe(this) {
+            Logger.d(TAG, "error observe: $it")
             showToast(it)
+        }
+
+        viewModel.usersLocal.observe(this) {
+            Logger.d(TAG, "local observe: ${it.size}")
+            adapter.updateList(it)
+        }
+
+        viewModel.loader.observe(this) {
+            Logger.d(TAG, "loader observe: $it")
+            if (it) {
+                //binding.rvUsers.visibility = View.GONE
+                binding.progressBar.visibility = View.VISIBLE
+            } else {
+                binding.rvUsers.visibility = View.VISIBLE
+                binding.progressBar.visibility = View.GONE
+            }
+
         }
     }
 
     private fun initUI() {
         adapter = UsersRecyclerAdapter(emptyList())
-        binding.rvUsers.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.rvUsers.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rvUsers.adapter = adapter
     }
 }
