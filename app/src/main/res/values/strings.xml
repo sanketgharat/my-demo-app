@@ -3,4 +3,8 @@
     <string name="users_list">List</string>
     <string name="sample_name">Lorem Ipsum</string>
     <string name="sample_email">loremipsum@lorem.com</string>
+    <string name="title_activity_user_home">UserHomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_photos">Photos</string>
+    <string name="title_profile">Profile</string>
 </resources>

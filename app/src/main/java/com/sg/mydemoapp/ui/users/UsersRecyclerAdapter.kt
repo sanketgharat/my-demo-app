@@ -12,7 +12,7 @@ import com.sg.mydemoapp.data.local.entity.User
 import com.sg.mydemoapp.utils.CommonUtil
 import com.sg.mydemoapp.utils.Logger
 
-class UsersRecyclerAdapter(private var list: List<User>) :
+class UsersRecyclerAdapter(private var list: List<User>, private val onUserClickListener: OnUserClickListener) :
     RecyclerView.Adapter<UsersRecyclerAdapter.MyViewHolder>() {
 
     companion object {
@@ -52,13 +52,19 @@ class UsersRecyclerAdapter(private var list: List<User>) :
         }
 
         holder.itemView.setOnClickListener {
-
+            onUserClickListener?.let {
+                onUserClickListener.onclick(list[holder.absoluteAdapterPosition])
+            }
         }
 
     }
 
-    public fun updateList(listToUpdate: List<User>) {
+    fun updateList(listToUpdate: List<User>) {
         list = listToUpdate
         notifyDataSetChanged()
+    }
+
+    interface OnUserClickListener {
+        fun onclick(user: User)
     }
 }
