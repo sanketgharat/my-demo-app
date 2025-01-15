@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import com.sg.mydemoapp.utils.Constants
 
 @Entity(tableName = "user_table")
 data class User(
@@ -26,4 +27,11 @@ data class User(
     @ColumnInfo(name = "website")
     @SerializedName("website") var website: String? = null,
 
-    )
+    ) {
+    fun getPhotoUrl(): String {
+        id?.let {
+            return Constants.PHOTO_BASE_URL + "id/${it + 50}/" + Constants.PROFILE_PHOTO_SIZE
+        }
+        return ""
+    }
+}

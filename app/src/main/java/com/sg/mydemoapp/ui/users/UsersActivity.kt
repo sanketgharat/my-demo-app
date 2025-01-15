@@ -31,7 +31,7 @@ class UsersActivity : BaseActivity(), UsersRecyclerAdapter.OnUserClickListener {
         setContentView(binding.root)
         viewModel = ViewModelProvider(this)[UsersViewModel::class.java]
         initUI()
-        if (CommonUtil.isOnline()) {
+        if (CommonUtil.isOnline(applicationContext)) {
             viewModel.getUsers()
         }
 
@@ -55,7 +55,7 @@ class UsersActivity : BaseActivity(), UsersRecyclerAdapter.OnUserClickListener {
         viewModel.loader.observe(this) {
             Logger.d(TAG, "loader observe: $it")
             if (it) {
-                //binding.rvUsers.visibility = View.GONE
+                binding.rvUsers.visibility = View.GONE
                 binding.progressBar.visibility = View.VISIBLE
             } else {
                 binding.rvUsers.visibility = View.VISIBLE

@@ -8,7 +8,12 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.sg.mydemoapp.databinding.FragmentUserProfileBinding
+import com.sg.mydemoapp.ui.users.UserHomeActivity
+import com.sg.mydemoapp.utils.Constants
+import com.sg.mydemoapp.utils.Logger
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class UserProfileFragment : Fragment() {
 
     private var _binding: FragmentUserProfileBinding? = null
@@ -16,6 +21,10 @@ class UserProfileFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private var userId: Int = 0
+    companion object {
+        val TAG = "UserProfileFragmentT"
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,11 +36,22 @@ class UserProfileFragment : Fragment() {
 
         _binding = FragmentUserProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
         val textView: TextView = binding.textProfile
-        userProfileViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        Logger.d(TAG, "onCreateView ")
+        UserHomeActivity.userIdHome?.let { id ->
+            Logger.d(TAG, "onCreateView args")
+            userId = id
+            userProfileViewModel.getUserData(userId).observe(viewLifecycleOwner) {
+                Logger.d(TAG, "User Observe: $userId = ${it.name}")
+                textView.text = it.name
+            }
         }
+
+
+        /*userProfileViewModel.text.observe(viewLifecycleOwner) {
+            textView.text = it
+        }*/
+
         return root
     }
 

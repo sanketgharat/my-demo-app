@@ -1,6 +1,7 @@
 package com.sg.mydemoapp.utils
 
-import android.graphics.Color
+import android.content.Context
+import com.sg.mydemoapp.MyDemoApplication
 import java.util.Arrays
 import java.util.Collections
 import java.util.Stack
@@ -9,7 +10,7 @@ import kotlin.random.Random
 object CommonUtil {
 
     private val recycle: Stack<Int> = Stack()
-    private val colors:Stack<Int> = Stack()
+    private val colors: Stack<Int> = Stack()
 
     init {
         recycle.addAll(
@@ -24,11 +25,11 @@ object CommonUtil {
         )
     }
 
-    fun isOnline() : Boolean {
-        return true
+    fun isOnline(application: Context): Boolean {
+        return (application as MyDemoApplication).isNetworkConnected
     }
 
-    fun createRandomColor() : String {
+    fun createRandomColor(): String {
         //return Color.argb(255, Random.nextInt(256), Random.nextInt(256), Random.nextInt(256))
         val randomInt = Random.nextInt(999999)
         return "#$randomInt"

@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.bumptech.glide.Glide
 import com.sg.mydemoapp.R
 import com.sg.mydemoapp.data.local.entity.User
 import com.sg.mydemoapp.utils.CommonUtil
@@ -43,12 +44,15 @@ class UsersRecyclerAdapter(private var list: List<User>, private val onUserClick
             val context = holder.iv_dp.context
             holder.tv_username.text = user.name
             holder.tv_email.text = user.email
-            /*Glide.with(holder.iv_dp)
-                .load(R.drawable.ic_launcher_background)
-                .into(holder.iv_dp)*/
+            val photoURL = user.getPhotoUrl()
+            Glide.with(context)
+                .load(photoURL)
+                .placeholder(R.drawable.baseline_person_24)
+                .circleCrop()
+                .into(holder.iv_dp)
             val color = CommonUtil.getColor()
-            Logger.d(TAG, "Random color at $position : $color")
-            holder.iv_dp.setColorFilter(color)
+            Logger.d(TAG, "Random color at $position : $color -$photoURL")
+            //holder.iv_dp.setColorFilter(color)
         }
 
         holder.itemView.setOnClickListener {

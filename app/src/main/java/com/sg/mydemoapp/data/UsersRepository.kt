@@ -17,6 +17,10 @@ class UsersRepository(private val apiService: APIService, private val database: 
         return database.userDao().getAllUsers()
     }
 
+    fun getUserFromLocal(id: Int) : LiveData<User> {
+        return database.userDao().getUser(id)
+    }
+
     suspend fun insertUsersToLocal(list: List<User>) = withContext(Dispatchers.IO) {
          database.userDao().insertData(list)
     }

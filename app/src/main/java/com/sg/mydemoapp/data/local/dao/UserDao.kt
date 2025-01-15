@@ -16,4 +16,7 @@ interface UserDao {
 
     @Query("SELECT * FROM user_table ORDER BY name ASC")
     fun getAllUsers() : LiveData<List<User>>
+
+    @Query("SELECT * FROM user_table WHERE id = :userId")
+    fun getUser(userId: Int) : LiveData<User>
 }

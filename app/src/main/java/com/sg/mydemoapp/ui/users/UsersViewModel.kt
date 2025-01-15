@@ -30,7 +30,7 @@ class UsersViewModel @Inject constructor(
     private var _error = MutableLiveData("")
     val error: LiveData<String> = _error
 
-    private val _loader: MutableLiveData<Boolean> = MutableLiveData(true)
+    private val _loader: MutableLiveData<Boolean> = MutableLiveData(false)
     val loader: LiveData<Boolean> = _loader
 
     init {
